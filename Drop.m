@@ -32,6 +32,6 @@ t = ((v - v0) / ax) * t0;
 
 %% G's
 
-N = sqrt(ax^2 + ax^2) / g; 
+N = g * cosd(theta) / g; 
 end
 

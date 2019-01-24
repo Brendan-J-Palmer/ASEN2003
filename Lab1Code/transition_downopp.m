@@ -1,4 +1,4 @@
-function [sy, sx, sz, N, s] = transition_downopp(theta, r, sx0, sy0, sz0)
+function [sy, sx, sz, N, downG, s] = transition_downopp(theta, r, sx0, sy0, sz0)
 %make transition from drop
 %output position and gs felt along with arc length
 % input theta travelled, radius, and initial position
@@ -18,6 +18,8 @@ v = sqrt(2 * g * (125 - sy)); %velocity due to change in height
 N1 = g .* cosd(tstep); % Normal force / m
 
 N = N1/g;
+
+downG = N;
 
 sz = sz0 * (tstep ./ tstep);
 

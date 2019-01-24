@@ -14,7 +14,9 @@ sy = sy0 + (r - r * cosd(tstep)); %height as a function of theta
 
 sx = sx0 + r * sind(tstep);
 
-N1 = g * cosd(tstep); % Normal force / m
+v = sqrt(2 * g * (125 - sy)); %velocity due to change in height
+
+N1 = g * cosd(tstep) + v.^2/r; % Normal force / m
 
 N = N1/g;
 

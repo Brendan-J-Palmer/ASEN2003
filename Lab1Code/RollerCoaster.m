@@ -3,6 +3,10 @@ sx = 0;
 sy = 125;
 sz = 0;
 N = [1];
+vGs = [1];
+hGs = [0];
+backGs = [0];
+DownGs = [0];
 s = 0;
 
 %transition to the downhill portion
@@ -11,6 +15,12 @@ sx = cat(1, sx, sxnew);
 sy = cat(1, sy, synew);
 sz = cat(1, sz, sznew);
 N = cat(1, N, Nnew);
+DownGinit = abs(DownGinit);
+r = length(Nnew);
+hGs = [hGs ; zeros(r, 1)];
+vGs = [vGs ; zeros(r, 1)];
+backGs = [backGs; zeros(r, 1)];
+DownGs = [DownGs; DownGinit];
 s = s + s0;
 
 
@@ -20,6 +30,11 @@ sx = cat(1, sx, sxnew);
 sy = cat(1, sy, synew);
 sz = cat(1, sz, sznew);
 N = cat(1, N, Nnew);
+r = length(Nnew);
+hGs = [hGs ; zeros(r, 1)];
+vGs = [vGs ; Nnew];
+backGs = [backGs; zeros(r, 1)];
+DownGs = [DownGs; zeros(r, 1)];
 s = s + s0;
 
 %to transition off of drop
@@ -28,6 +43,11 @@ sx = cat(1, sx, sxnew);
 sy = cat(1, sy, synew);
 sz = cat(1, sz, sznew);
 N = cat(1, N, Nnew);
+r = length(Nnew);
+hGs = [hGs ; zeros(r, 1)];
+vGs = [vGs ; Nnew];
+backGs = [backGs; zeros(r, 1)];
+DownGs = [DownGs; zeros(r, 1)];
 s = s + s0;
 
 %10m straight path
@@ -35,6 +55,11 @@ sx = cat(1, sx, sx(end)+10);
 sy = cat(1, sy, sy(end));
 sz = cat(1, sz, sz(end));
 N = cat(1, N, 1);
+hGs = [hGs ; 0];
+vGs = [vGs ; 1];
+backGs = [backGs; 0];
+DownGs = [DownGs; 0];
+s = s + 10;
 
 %begin loop
 [synew, sxnew, sznew, Nnew, s0] = loop(30, sx(end), sy(end), sz(end));
@@ -42,6 +67,11 @@ sx = cat(1, sx, sxnew);
 sy = cat(1, sy, synew);
 sz = cat(1, sz, sznew);
 N = cat(1, N, Nnew);
+r = length(Nnew);
+hGs = [hGs ; zeros(r, 1)];
+vGs = [vGs ; Nnew];
+backGs = [backGs; zeros(r, 1)];
+DownGs = [DownGs; zeros(r, 1)];
 s = s + s0;
 
 %create straight
@@ -49,6 +79,11 @@ sx = cat(1, sx, sx(end)+5);
 sy = cat(1, sy, sy(end));
 sz = cat(1, sz, sz(end));
 N = cat(1, N, 1);
+hGs = [hGs ; 0];
+vGs = [vGs ; 1];
+backGs = [backGs; 0];
+DownGs = [DownGs; 0];
+s = s + 5;
 
 %begin loop
 [synew, sxnew, sznew, Nnew, s0] = loop(30, sx(end), sy(end), sz(end));
@@ -56,6 +91,11 @@ sx = cat(1, sx, sxnew);
 sy = cat(1, sy, synew);
 sz = cat(1, sz, sznew);
 N = cat(1, N, Nnew);
+r = length(Nnew);
+hGs = [hGs ; zeros(r, 1)];
+vGs = [vGs ; Nnew];
+backGs = [backGs; zeros(r, 1)];
+DownGs = [DownGs; zeros(r, 1)];
 s = s + s0;
 
 %create straight
@@ -63,6 +103,11 @@ sx = cat(1, sx, sx(end)+5);
 sy = cat(1, sy, sy(end));
 sz = cat(1, sz, sz(end));
 N = cat(1, N, 1);
+hGs = [hGs ; 0];
+vGs = [vGs ; 1];
+backGs = [backGs; 0];
+DownGs = [DownGs; 0];
+s = s + 5;
 
 %begin transition to parabola
 [synew, sxnew, sznew, Nnew, s0] = transition_up(40, 50, sx(end), sy(end), sz(end));
@@ -70,6 +115,11 @@ sx = cat(1, sx, sxnew);
 sy = cat(1, sy, synew);
 sz = cat(1, sz, sznew);
 N = cat(1, N, Nnew);
+r = length(Nnew);
+hGs = [hGs ; zeros(r, 1)];
+vGs = [vGs ; Nnew];
+backGs = [backGs; zeros(r, 1)];
+DownGs = [DownGs; zeros(r, 1)];
 s = s + s0;
 
 %begin parabola
@@ -78,6 +128,11 @@ sx = cat(1, sx, sxnew);
 sy = cat(1, sy, synew);
 sz = cat(1, sz, sznew);
 N = cat(1, N, Nnew);
+r = length(Nnew);
+hGs = [hGs ; zeros(r, 1)];
+vGs = [vGs ; Nnew];
+backGs = [backGs; zeros(r, 1)];
+DownGs = [DownGs; zeros(r, 1)];
 s = s + s0;
 
 %transition down from parabola
@@ -86,14 +141,24 @@ sx = cat(1, sx, sxnew);
 sy = cat(1, sy, synew);
 sz = cat(1, sz, sznew);
 N = cat(1, N, Nnew);
+r = length(Nnew);
+hGs = [hGs ; zeros(r, 1)];
+vGs = [vGs ; Nnew];
+backGs = [backGs; zeros(r, 1)];
+DownGs = [DownGs; zeros(r, 1)];
 s = s + s0;
 
 %create corkscrew into banked turn
-[sxnew, synew, sznew, Nnew, s0] = cart_turn(5, 40, sx(end), sy(end), sz(end));
+[sxnew, synew, sznew, Nnew, hGsnew, vGsnew, s0] = cart_turn(5, 40, sx(end), sy(end), sz(end));
 sx = cat(1, sx, sxnew);
 sy = cat(1, sy, synew);
 sz = cat(1, sz, sznew);
 N = cat(1, N, Nnew);
+r = length(Nnew);
+hGs = [hGs ; hGsnew];
+vGs = [vGs ; vGsnew];
+backGs = [backGs; zeros(r, 1)];
+DownGs = [DownGs; zeros(r, 1)];
 s = s + s0;
 
 %banked turn
@@ -102,15 +167,25 @@ sx = cat(1, sx, sxnew);
 sy = cat(1, sy, synew);
 sz = cat(1, sz, sznew);
 N = cat(1, N, Nnew);
-s = s + s0;
+r = length(Nnew);
 HgsBankedTurn = abs(HgsBankedTurn);
+hGs = [hGs ; HgsBankedTurn];
+vGs = [vGs ; Vgsbankedturn];
+backGs = [backGs; zeros(r, 1)];
+DownGs = [DownGs; zeros(r, 1)];
+s = s + s0;
 
 %turn out of banked turn
-[sxnew, synew, sznew, Nnew, s0] = cart_turn_exit(5, 40, sx(end), sy(end), sz(end));
+[sxnew, synew, sznew, Nnew, hGsnew, vGsnew, s0] = cart_turn_exit(5, 40, sx(end), sy(end), sz(end));
 sx = cat(1, sx, sxnew);
 sy = cat(1, sy, synew);
 sz = cat(1, sz, sznew);
 N = cat(1, N, Nnew);
+r = length(Nnew);
+hGs = [hGs ; hGsnew];
+vGs = [vGs ; vGsnew];
+backGs = [backGs; zeros(r, 1)];
+DownGs = [DownGs; zeros(r, 1)];;
 s = s + s0;
 
 %transition down from banked turn
@@ -119,8 +194,13 @@ sx = cat(1, sx, sxnew);
 sy = cat(1, sy, synew);
 sz = cat(1, sz, sznew);
 N = cat(1, N, Nnew);
-s = s + s0;
 downGsec = abs(downGsec);
+r = length(Nnew);
+hGs = [hGs ; zeros(r, 1)];
+vGs = [vGs ; zeros(r, 1)];
+backGs = [backGs; zeros(r, 1)];
+DownGs = [DownGs; downGsec];
+s = s + s0;
 
 %transition to ground
 loopr = vpa(sy(end))/cosd(60);
@@ -129,6 +209,11 @@ sx = cat(1, sx, sxnew);
 sy = cat(1, sy, synew);
 sz = cat(1, sz, sznew);
 N = cat(1, N, Nnew);
+r = length(Nnew);
+hGs = [hGs ; zeros(r, 1)];
+vGs = [vGs ; Nnew];
+backGs = [backGs; zeros(r, 1)];
+DownGs = [DownGs; zeros(r, 1)];
 s = s + s0;
 
 %make final adjustments to data
@@ -143,8 +228,14 @@ sx = cat(1, sx, sxnew);
 sy = cat(1, sy, synew);
 sz = cat(1, sz, sznew);
 N = cat(1, N, Nnew);
+r = length(Nnew);
+hGs = [hGs ; zeros(r, 1)];
+vGs = [vGs ; vGsdec];
+backGs = [backGs; backGsdec];
+DownGs = [DownGs; zeros(r, 1)];
 s = s + s0;
 s = double(s);
+vGs = double(vGs);
 
 fprintf('The max gs felt is %.3f \n', max(N));
 fprintf('The max horizontal gs felt is %.3f on the banked turn \n', max(HgsBankedTurn));
@@ -155,6 +246,7 @@ fprintf('The roller coaster is %.1f meters long \n', s);
 
 
 %plot the graph
+figure(1)
 surf([sx,sx],[sz,sz],[sy,sy],N,'LineWidth', 3);
 colorbar
 xlim([0 350]);
@@ -165,6 +257,46 @@ xlabel('x');
 ylabel('z');
 zlabel('y');
 
+figure(2)
+surf([sx,sx],[sz,sz],[sy,sy],backGs,'LineWidth', 3);
+colorbar
+xlim([0 350]);
+ylim([0 100]);
+zlim([0 135]);
+title('Number of Backwards Gravities felt at each point along a track');
+xlabel('x');
+ylabel('z');
+zlabel('y');
 
+figure(3)
+surf([sx,sx],[sz,sz],[sy,sy],DownGs,'LineWidth', 3);
+colorbar
+xlim([0 350]);
+ylim([0 100]);
+zlim([0 135]);
+title('Number of  Downward Gravities felt at each point along a track');
+xlabel('x');
+ylabel('z');
+zlabel('y');
 
+figure(4)
+surf([sx,sx],[sz,sz],[sy,sy],hGs,'LineWidth', 3);
+colorbar
+xlim([0 350]);
+ylim([0 100]);
+zlim([0 135]);
+title('Number of  Horizontal Gravities felt at each point along a track');
+xlabel('x');
+ylabel('z');
+zlabel('y');
 
+figure(5)
+surf([sx,sx],[sz,sz],[sy,sy],vGs,'LineWidth', 3);
+colorbar
+xlim([0 350]);
+ylim([0 100]);
+zlim([0 135]);
+title('Number of Upward Gravities felt at each point along a track');
+xlabel('x');
+ylabel('z');
+zlabel('y');

@@ -1,5 +1,7 @@
 function [sy, sx, sz, N, s] = transition_offdrop(theta, r, sx0, sy0, sz0)
-%UNTITLED2 Summary of this function goes here
+%make transition off drop
+%output position and gs felt along with arc length
+% input theta travelled, radius, and initial position
 
 %% Gravity
 g = 9.81;

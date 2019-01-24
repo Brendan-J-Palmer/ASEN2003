@@ -50,6 +50,20 @@ sy = cat(1, sy, sy(end));
 sz = cat(1, sz, sz(end));
 N = cat(1, N, 1);
 
+%begin loop
+[synew, sxnew, sznew, Nnew, s0] = loop(35, sx(end), sy(end), sz(end));
+sx = cat(1, sx, sxnew);
+sy = cat(1, sy, synew);
+sz = cat(1, sz, sznew);
+N = cat(1, N, Nnew);
+s = s + s0;
+
+%create straight
+sx = cat(1, sx, sx(end)+5);
+sy = cat(1, sy, sy(end));
+sz = cat(1, sz, sz(end));
+N = cat(1, N, 1);
+
 %begin transition to parabola
 [synew, sxnew, sznew, Nnew, s0] = transition_up(40, 30, sx(end), sy(end), sz(end));
 sx = cat(1, sx, sxnew);
@@ -83,7 +97,7 @@ N = cat(1, N, Nnew);
 s = s + s0;
 
 %banked turn
-[synew, sxnew, sznew, Nnew, Vgsbankedturn, HgsBankedTurn, s0] = bankedTurn(40, 30, sx(end), sy(end), sz(end));
+[synew, sxnew, sznew, Nnew, Vgsbankedturn, HgsBankedTurn, s0] = bankedTurn(40, 40, sx(end), sy(end), sz(end));
 sx = cat(1, sx, sxnew);
 sy = cat(1, sy, synew);
 sz = cat(1, sz, sznew);
@@ -130,11 +144,10 @@ s = s + s0;
 s = double(s);
 
 %plot the graph
-%plot3(sx,sz,sy);
 surf([sx,sx],[sz,sz],[sy,sy],N,'LineWidth', 3);
 colorbar
 xlim([0 350]);
-ylim([0 75]);
+ylim([0 100]);
 zlim([0 135]);
 title('Number of Gravities felt at each point along a track');
 xlabel('x');

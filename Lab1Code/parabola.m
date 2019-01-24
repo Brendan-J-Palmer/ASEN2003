@@ -1,6 +1,8 @@
 function [sy, sx, sz, N, s] = parabola(theta, sx0, sy0, sz0)
 % ASEN 2003 Lab 1 parabola function for zero g's
 % in this function the track follows projectile motion
+%Output position g's felt and arc length
+%input initial launch angle and position
 %% Define gravity
 g = 9.81;
 %% acceleration due to gravity to solve for position and velocity

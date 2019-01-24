@@ -1,6 +1,7 @@
 function [sx, sy, sz, backGs, vGs, N, s] = decelerate(sx0, sy0, sz0)
-%UNTITLED11 Summary of this function goes here
-%   Detailed explanation goes here
+%tracks the g force as the cart decelerates
+%input the position
+%output position, g's backwards, g's up, g's total, and arc length
 %% gravity
 g=9.81;
 

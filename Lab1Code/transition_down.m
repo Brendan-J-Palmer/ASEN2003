@@ -1,6 +1,7 @@
 function [sy, sx, sz, N, s] = transition_down(theta, r, sx0, sy0, sz0)
-%UNTITLED3 Summary of this function goes here
-%   Detailed explanation goes here
+%make transition to ramp
+%output position and gs felt along with arc length
+% input theta travelled, radius, and initial position
 %% Gravity
 g = 9.81;
 %% Tangent normal coordinate system

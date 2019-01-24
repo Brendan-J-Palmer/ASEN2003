@@ -1,4 +1,7 @@
 function [sx, sy, sz, N, s] = cart_turn_exit(long, theta, sx0, sy0, sz0)
+%Shows the g's of the cart while it makes its turn
+%input length of segment, initial position and angle rotated
+%output the position array and the length and the g's
 %% gravity
 s = long;
 g = 9.81;

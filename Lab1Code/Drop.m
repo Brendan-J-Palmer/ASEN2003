@@ -3,8 +3,8 @@ function [sz, sy, sx, N, s] = Drop(theta, length, sx0, sy0, sz0)
 % Position is given in standard x y coordinate system
 % velocity and acceleration follow a tilted x y coordiante system with x
 % along the ramp
-
-
+%input position, length of ramp, and angle of incline of ramp
+% output the position and the arc length and g's felt
 %%acceleration
 g = 9.81;
 
@@ -21,7 +21,7 @@ s = length;
 
 %% G's
 
-N = g * cosd(theta) / g;
+N = cosd(theta);
 
 end
 

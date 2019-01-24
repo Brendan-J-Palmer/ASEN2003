@@ -1,6 +1,7 @@
 function [sy, sx, sz,N, vN, hN, s] = bankedTurn(theta, r, sx0, sy0, sz0)
-%UNTITLED Summary of this function goes here
-%   Detailed explanation goes here
+%calculated the g force as the cart goes around the banked turn
+%input angle of incline, radius, and position
+%output position array, g's, vertical g's, horizontal g's, and arc length
 
 %% gravity
 g = 9.81;

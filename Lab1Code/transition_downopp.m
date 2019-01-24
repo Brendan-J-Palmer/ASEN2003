@@ -1,5 +1,8 @@
 function [sy, sx, sz, N, s] = transition_downopp(theta, r, sx0, sy0, sz0)
-%UNTITLED8 Summary of this function goes here
+%make transition from drop
+%output position and gs felt along with arc length
+% input theta travelled, radius, and initial position
+
 %% Gravity
 g = 9.81;
 %% Tangent normal coordinate system

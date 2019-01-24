@@ -1,4 +1,4 @@
-function [ t, v, height, xdisp, sz, N] = loop(t0, r, sx0, sy0, sz0)
+function [height, xdisp, sz, N, s] = loop(r, sx0, sy0, sz0)
 % ASEN 2003 Lab 1 Loop function
 %{
 determine the normal force for a circular loop
@@ -9,7 +9,7 @@ direction is negligible outside of position correction
 g = 9.81;
 %% Tangent normal coordinate system
 
-tstep = (0:0.1:360)';
+tstep = (0:360)';
 
 height = sy0 + (r - r * cosd(tstep)); %height as a function of theta
 
@@ -21,11 +21,11 @@ N1 = g .* cosd(tstep) + (v.^2) ./ r; % Normal force / m
 
 N = N1/g;
 
-t=0;
+sz_step = 1/360;
 
-sz_step = 360/3601;
+sz = sz0 + sz_step * tstep;
 
-sz = sz_step * tstep;
-
+% arc length
+s = 2 * pi * r;
 end
 

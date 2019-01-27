@@ -215,6 +215,7 @@ vGs = [vGs ; Nnew];
 backGs = [backGs; zeros(r, 1)];
 DownGs = [DownGs; zeros(r, 1)];
 s = s + s0;
+V = abs(sqrt(2 * 9.81 * (125 - sy)));
 
 %make final adjustments to data
 N = abs(N);
@@ -236,6 +237,7 @@ DownGs = [DownGs; zeros(r, 1)];
 s = s + s0;
 s = double(s);
 vGs = double(vGs);
+V = [V; 0];
 
 fprintf('The max gs felt is %.3f \n', max(N));
 fprintf('The max horizontal gs felt is %.3f on the banked turn \n', max(HgsBankedTurn));
@@ -247,9 +249,10 @@ fprintf('The roller coaster is %.1f meters long \n', s);
 
 %plot the graph
 figure(1)
-surf([sx,sx],[sz,sz],[sy,sy],N,'LineWidth', 3);
-colorbar
-xlim([0 350]);
+color_line3(sx,sz,sy,N,'LineWidth',2.5);
+c = colorbar;
+colormap spring;
+c.Label.String = 'Gs Felt';xlim([0 350]);
 ylim([0 100]);
 zlim([0 135]);
 title('Number of Gravities felt at each point along a track');
@@ -258,8 +261,9 @@ ylabel('z');
 zlabel('y');
 
 figure(2)
-surf([sx,sx],[sz,sz],[sy,sy],backGs,'LineWidth', 3);
-colorbar
+color_line3(sx,sz,sy,backGs,'LineWidth',2.5);
+c = colorbar;
+c.Label.String = 'Gs Felt';
 xlim([0 350]);
 ylim([0 100]);
 zlim([0 135]);
@@ -269,8 +273,9 @@ ylabel('z');
 zlabel('y');
 
 figure(3)
-surf([sx,sx],[sz,sz],[sy,sy],DownGs,'LineWidth', 3);
-colorbar
+color_line3(sx,sz,sy,DownGs,'LineWidth',2.5);
+c = colorbar;
+c.Label.String = 'Gs Felt';
 xlim([0 350]);
 ylim([0 100]);
 zlim([0 135]);
@@ -280,8 +285,9 @@ ylabel('z');
 zlabel('y');
 
 figure(4)
-surf([sx,sx],[sz,sz],[sy,sy],hGs,'LineWidth', 3);
-colorbar
+color_line3(sx,sz,sy,hGs,'LineWidth',2.5);
+c = colorbar;
+c.Label.String = 'Gs Felt';
 xlim([0 350]);
 ylim([0 100]);
 zlim([0 135]);
@@ -291,8 +297,9 @@ ylabel('z');
 zlabel('y');
 
 figure(5)
-surf([sx,sx],[sz,sz],[sy,sy],vGs,'LineWidth', 3);
-colorbar
+color_line3(sx,sz,sy,vGs,'LineWidth',2.5);
+c = colorbar;
+c.Label.String = 'Gs Felt';
 xlim([0 350]);
 ylim([0 100]);
 zlim([0 135]);
@@ -300,3 +307,10 @@ title('Number of Upward Gravities felt at each point along a track');
 xlabel('x');
 ylabel('z');
 zlabel('y');
+
+figure(6)
+color_line3(sx,sz,sy,V,'LineWidth',2.5);
+colormap spring;
+c = colorbar;
+c.Label.String = 'Velocity in m/s';
+title('Velocities in the rollercoaster');

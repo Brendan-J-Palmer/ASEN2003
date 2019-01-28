@@ -256,9 +256,9 @@ c.Label.String = 'Gs Felt';xlim([0 350]);
 ylim([0 100]);
 zlim([0 135]);
 title('Number of Gravities felt at each point along a track');
-xlabel('x');
-ylabel('z');
-zlabel('y');
+xlabel('x (m)');
+ylabel('z (m)');
+zlabel('y (m)');
 
 figure(2)
 color_line3(sx,sz,sy,backGs,'LineWidth',2.5);
@@ -268,9 +268,9 @@ xlim([0 350]);
 ylim([0 100]);
 zlim([0 135]);
 title('Number of Backwards Gravities felt at each point along a track');
-xlabel('x');
-ylabel('z');
-zlabel('y');
+xlabel('x (m)');
+ylabel('z (m)');
+zlabel('y (m)');
 
 figure(3)
 color_line3(sx,sz,sy,DownGs,'LineWidth',2.5);
@@ -280,9 +280,9 @@ xlim([0 350]);
 ylim([0 100]);
 zlim([0 135]);
 title('Number of  Downward Gravities felt at each point along a track');
-xlabel('x');
-ylabel('z');
-zlabel('y');
+xlabel('x (m)');
+ylabel('z (m)');
+zlabel('y (m)');
 
 figure(4)
 color_line3(sx,sz,sy,hGs,'LineWidth',2.5);
@@ -292,9 +292,9 @@ xlim([0 350]);
 ylim([0 100]);
 zlim([0 135]);
 title('Number of  Horizontal Gravities felt at each point along a track');
-xlabel('x');
-ylabel('z');
-zlabel('y');
+xlabel('x (m)');
+ylabel('z (m)');
+zlabel('y (m)');
 
 figure(5)
 color_line3(sx,sz,sy,vGs,'LineWidth',2.5);
@@ -304,9 +304,9 @@ xlim([0 350]);
 ylim([0 100]);
 zlim([0 135]);
 title('Number of Upward Gravities felt at each point along a track');
-xlabel('x');
-ylabel('z');
-zlabel('y');
+xlabel('x (m)');
+ylabel('z (m)');
+zlabel('y (m)');
 
 figure(6)
 color_line3(sx,sz,sy,V,'LineWidth',2.5);
@@ -314,3 +314,9 @@ colormap spring;
 c = colorbar;
 c.Label.String = 'Velocity in m/s';
 title('Velocities in the rollercoaster');
+xlim([0 350]);
+ylim([0 100]);
+zlim([0 135]);
+xlabel('x (m)');
+ylabel('z (m)');
+zlabel('y (m)');
